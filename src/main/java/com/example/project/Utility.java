@@ -1,4 +1,4 @@
-package com.example.project;
+    package com.example.project;
 import java.util.ArrayList;
 
 public class Utility{
@@ -56,6 +56,4 @@ public class Utility{
         }
         return -1;
     }
-
-
 }
