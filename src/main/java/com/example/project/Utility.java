@@ -1,7 +1,8 @@
-    package com.example.project;
+package com.example.project;
+
 import java.util.ArrayList;
 
-public class Utility{
+public class Utility {
     private static String[] hands = {
         "Royal Flush",
         "Straight Flush",
@@ -18,11 +19,21 @@ public class Utility{
     private static String[] suits  = {"♠","♥","♣", "♦"};
     private static String[] ranks = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
 
-    public static String[] getRanks(){return ranks;}
-    public static String[] getSuits(){return suits;}
+    public static String[] getRanks() {
+        return ranks;
+    }
 
-    public static int getRankValue(String rank){
-        switch(rank){
+    public static String[] getSuits() {
+        return suits;
+    }
+
+    public static String[] getHands() {
+        return hands;
+    }
+
+
+    public static int getRankValue(String rank) {
+        switch (rank) {
             case "2": return 2;
             case "3": return 3;
             case "4": return 4;
@@ -40,8 +51,8 @@ public class Utility{
         return -1;
     }
 
-    public static int getHandRanking(String result){
-        switch(result){
+    public static int getHandRanking(String result) {
+        switch (result) {
             case "Royal Flush": return 11;
             case "Straight Flush": return 10;
             case "Four of a Kind": return 9;
