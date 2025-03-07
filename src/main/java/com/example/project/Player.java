@@ -1,7 +1,6 @@
 package com.example.project;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class Player {
@@ -41,10 +40,12 @@ public class Player {
 
         // Check for the best possible hand in descending order of strength
         if (isStraightFlush(rankFrequency, suitFrequency)) {
-            // The ? : operator is a ternary operator. It works like a compact if-else statement.
-            // If the condition (allCards.get(allCards.size() - 1).getRank().equals("A")) is true,
-            // it returns "Royal Flush"; otherwise, it returns "Straight Flush".
-            return allCards.get(allCards.size() - 1).getRank().equals("A") ? "Royal Flush" : "Straight Flush";
+            // Replace ternary operator with if-else
+            if (allCards.get(allCards.size() - 1).getRank().equals("A")) {
+                return "Royal Flush";
+            } else {
+                return "Straight Flush";
+            }
         }
 
         if (hasFourOfAKind(rankFrequency)) {
@@ -77,7 +78,11 @@ public class Player {
         }
 
         // If no other hand is found, check if the player has a high card or nothing
-        return highCardOrNothing() ? "High Card" : "Nothing";
+        if (highCardOrNothing()) {
+            return "High Card";
+        } else {
+            return "Nothing";
+        }
     }
 
     // Method to check if the hand is a straight flush
@@ -115,9 +120,20 @@ public class Player {
         return false; // Player has nothing
     }
 
-    // Method to sort all cards by rank
+    // Method to sort all cards by rank (without using lambda or Comparator)
     public void sortAllCards() {
-        allCards.sort(Comparator.comparingInt(card -> Utility.getRankValue(card.getRank())));
+        for (int i = 0; i < allCards.size() - 1; i++) {
+            for (int j = i + 1; j < allCards.size(); j++) {
+                int rank1 = Utility.getRankValue(allCards.get(i).getRank());
+                int rank2 = Utility.getRankValue(allCards.get(j).getRank());
+                if (rank1 > rank2) {
+                    // Swap cards if they are out of order
+                    Card temp = allCards.get(i);
+                    allCards.set(i, allCards.get(j));
+                    allCards.set(j, temp);
+                }
+            }
+        }
     }
 
     // Method to find the frequency of each rank in the allCards list
